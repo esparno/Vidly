@@ -11,6 +11,26 @@ namespace Vidly.Controllers
     public class MoviesController : Controller
     {
         // GET: Movies
+        public IEnumerable<Movie> GetMovies()
+        {
+            return new List<Movie>
+            {
+                new Movie {Id =1, Name = "Taken"},
+                new Movie {Id =2, Name = "Wall-e"}
+            };
+        }
+        public ViewResult Index()
+        {
+            var movies = GetMovies();
+            return View(movies);
+        }
+        public ActionResult Details(int id)
+        {
+            var movie = GetMovies().SingleOrDefault(c => c.Id == id);
+            if (movie == null)
+                return HttpNotFound();
+            return View(movie);
+        }
         public ActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek" };
