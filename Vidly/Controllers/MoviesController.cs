@@ -10,23 +10,23 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-        // GET: Movies
-        public IEnumerable<Movie> GetMovies()
+        private ApplicationDbContext _context;
+        public MoviesController()
         {
-            return new List<Movie>
-            {
-                new Movie {Id =1, Name = "Taken"},
-                new Movie {Id =2, Name = "Wall-e"}
-            };
+            _context = new ApplicationDbContext();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
         }
         public ViewResult Index()
         {
-            var movies = GetMovies();
+            var movies = _context.Movies.ToList(); ;
             return View(movies);
         }
         public ActionResult Details(int id)
         {
-            var movie = GetMovies().SingleOrDefault(c => c.Id == id);
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
             if (movie == null)
                 return HttpNotFound();
             return View(movie);
