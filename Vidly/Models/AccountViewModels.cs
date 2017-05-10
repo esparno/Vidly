@@ -13,6 +13,11 @@ namespace Vidly.Models
         [Display(Name = "Driving License")]
         [StringLengthAttribute(255)]
         public string DrivingLicense { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [StringLengthAttribute(50)]
+        public string Phone { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -69,6 +74,11 @@ namespace Vidly.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Phone Number")]
+        [StringLengthAttribute(50)]
+        public string Phone { get; set; }
+
         [Required]
         [Display(Name = "Driving License")]
         public string DrivingLicense { get; set; }
